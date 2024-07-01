@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
+import java.util.HashMap;
 import java.util.Map;
 
 @RestController
@@ -51,6 +52,12 @@ public class UserJwtController {
         Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(request.getUserName(),request.getPassword()));
 
         String token= jwtUtils.generateToken(authentication); // create token
+        Map<String,String> map = new HashMap<>();
+        map.put("token",token);
+        map.put("status","true");
+
+        return new ResponseEntity<>(map,HttpStatus.CREATED); // new cr
+
 
 
 
